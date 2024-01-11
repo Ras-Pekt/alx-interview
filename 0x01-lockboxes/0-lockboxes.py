@@ -5,18 +5,25 @@ a method that determines if all the boxes can be opened
 
 
 def canUnlockAll(boxes):
-    """
-    determines if all the boxes can be opened
-    """
-    n = len(boxes)
-    visited = [False] * n
+    number_of_boxes = len(boxes)
+    open_boxes = [False for i in range(number_of_boxes)]
+    open_boxes[0] = True
 
-    def breadth_first_search(box):
-        """bfs algorithm"""
-        visited[box] = True
-        for next_box in boxes[box]:
-            if not visited[next_box]:
-                breadth_first_search(next_box)
+    keys = boxes[0]
 
-    breadth_first_search(0)
-    return all(visited)
+    while True:
+        """iterating through the boxes"""
+        new_keys = []
+
+        for key in keys:
+            """iterating through the keys in each box"""
+            if key < number_of_boxes and open_boxes[key] == False:
+                open_boxes[key] = True
+                new_keys.extend(boxes[key])
+
+        if not new_keys:
+            break
+
+        keys.extend(new_keys)
+
+    return all(open_boxes)
