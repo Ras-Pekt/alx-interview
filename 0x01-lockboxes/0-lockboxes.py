@@ -17,7 +17,7 @@ def canUnlockAll(boxes):
 
         for key in keys:
             """iterating through the keys in each box"""
-            if key < number_of_boxes and open_boxes[key] == False:
+            if key < number_of_boxes and open_boxes[key] is False:
                 open_boxes[key] = True
                 new_keys.extend(boxes[key])
 
