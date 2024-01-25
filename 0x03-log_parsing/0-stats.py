@@ -52,3 +52,4 @@ if __name__ == "__main__":
         for code, number in status_codes.items():
             if number != 0:
                 print(f"{code}: {number}")
+        raise
