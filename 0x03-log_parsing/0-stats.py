@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Task: 0. Log Parsing
-File: 0x06-log_parsing/0-stats.py
+a script that reads stdin line by line and computes metrics
 """
 from sys import stdin
 
