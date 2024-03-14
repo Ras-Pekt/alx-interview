@@ -18,7 +18,7 @@ def isWinner(x, nums):
     """
     returns the winner of the prime game
     """
-    if len(nums) != x:
+    if not nums or x < 1 or len(nums) != x:
         return None
 
     wins = {'Maria': 0, 'Ben': 0}
