@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""prime game module"""
+
 
 def generate_primes(n):
     """
