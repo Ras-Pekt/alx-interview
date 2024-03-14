@@ -2,35 +2,43 @@
 """prime game module"""
 
 
-def is_prime(num):
-    """generates primes"""
-    if num < 2:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
+def generate_primes(n):
+    """
+    generates primes
+    """
+    primes = []
+    for i in range(2, n+1):
+        is_prime = True
+        for j in range(2, int(i**0.5) + 1):
+            if i % j == 0:
+                is_prime = False
+                break
+        if is_prime:
+            primes.append(i)
+    return primes
 
 
 def isWinner(x, nums):
-    """returns winner"""
-
-    if not nums or x < 1 or len(nums) != x:
+    """
+    Returns the winner
+    """
+    if not nums or x < 1 or len(nums) < x:
         return None
 
-    ben = 0
-    maria = 0
+    wins = {"ben": 0, "maria": 0}
+    i = 0
 
-    for n in nums:
-        primes = [i for i in range(2, n + 1) if is_prime(i)]
+    while i < x:
+        primes = generate_primes(nums[i])
         if len(primes) % 2 == 0:
-            ben += 1
+            wins["ben"] += 1
         else:
-            maria += 1
+            wins["maria"] += 1
+        i += 1
 
-    if maria > ben:
-        return "Maria"
-    elif ben > maria:
-        return "Ben"
+    if wins["ben"] > wins["maria"]:
+        return 'Ben'
+    elif wins["maria"] > wins["ben"]:
+        return 'Maria'
     else:
         return None
