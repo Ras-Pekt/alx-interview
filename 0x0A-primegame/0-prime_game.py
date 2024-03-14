@@ -23,6 +23,8 @@ def prime_game(n):
 
 def isWinner(x, nums):
     """returns winner of prime game"""
+    if not nums or x < 1 or len(nums) != x:
+        return None
 
     winners = [prime_game(n) for n in nums]
     maria_wins = winners.count("Maria")
