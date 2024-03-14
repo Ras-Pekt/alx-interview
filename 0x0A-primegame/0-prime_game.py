@@ -2,40 +2,35 @@
 """prime game module"""
 
 
-def generate_primes(n):
-    """
-    generates primes
-    """
-    primes = [True for _ in range(n+1)]
-    p = 2
-    while p * p <= n:
-        if primes[p] is True:
-            for i in range(p * p, n + 1, p):
-                primes[i] = False
-        p += 1
-    return [p for p in range(2, n + 1) if primes[p]]
+def is_prime(num):
+    """generates primes"""
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
+def prime_game(n):
+    """calculates wins in prime game"""
+    primes = [i for i in range(2, n + 1) if is_prime(i)]
+    if len(primes) % 2 == 0:
+        return "Ben"
+    else:
+        return "Maria"
 
 
 def isWinner(x, nums):
-    """
-    returns the winner of the prime game
-    """
-    if not nums or x < 1 or len(nums) != x:
-        return None
+    """returns winner of prime game"""
 
-    wins = {'Maria': 0, 'Ben': 0}
-    for n in nums:
-        primes = generate_primes(n)
-        while primes:
-            if len(primes) % 2 == 0:
-                primes.remove(min(primes))
-                wins['Maria'] += 1
-            else:
-                primes.remove(min(primes))
-                wins['Ben'] += 1
-    if wins['Maria'] > wins['Ben']:
-        return 'Maria'
-    elif wins['Ben'] > wins['Maria']:
-        return 'Ben'
+    winners = [prime_game(n) for n in nums]
+    maria_wins = winners.count("Maria")
+    ben_wins = winners.count("Ben")
+
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
+        return "Ben"
     else:
         return None
