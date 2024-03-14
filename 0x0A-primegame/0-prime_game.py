@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
 def generate_primes(n):
+    """
+    generates primes
+    """
     primes = [True for _ in range(n+1)]
     p = 2
     while p * p <= n:
@@ -12,6 +15,9 @@ def generate_primes(n):
 
 
 def isWinner(x, nums):
+    """
+    returns the winner of the prime game
+    """
     if len(nums) != x:
         return None
 
