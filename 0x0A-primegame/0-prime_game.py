@@ -2,74 +2,36 @@
 """prime game module"""
 
 
-# def is_prime(num):
-#     """generates primes"""
-#     if num < 2:
-#         return False
-#     for i in range(2, int(num ** 0.5) + 1):
-#         if num % i == 0:
-#             return False
-#     return True
-
-
-# def isWinner(x, nums):
-#     """returns winner"""
-
-#     if not nums or x < 1 or len(nums) != x:
-#         return None
-
-#     ben = 0
-#     maria = 0
-
-#     for n in nums:
-#         primes = [i for i in range(2, n + 1) if is_prime(i)]
-#         if len(primes) % 2 == 0:
-#             ben += 1
-#         else:
-#             maria += 1
-
-#     if maria > ben:
-#         return "Maria"
-#     elif ben > maria:
-#         return "Ben"
-#     else:
-#         return None
-def generate_primes(n):
-    """
-    returns a list of primes
-    """
-    primes = []
-    for i in range(2, n + 1):
-        is_prime = True
-        for j in range(2, int(i**0.5) + 1):
-            if i % j == 0:
-                is_prime = False
-                break
-        if is_prime:
-            primes.append(i)
-    return primes
+def is_prime(num):
+    """generates primes"""
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
 
 
 def isWinner(x, nums):
-    """
-    Returns the winner
-    """
-    if not nums or x < 1 or len(nums) < x:
-        return None
-    wins = {"ben": 0, "maria": 0}
-    i = 0
+    """returns winner"""
 
-    while i < x:
-        primes = generate_primes(nums[i])
+    if not nums or x < 1 or len(nums) != x:
+        return None
+
+    wins = {
+        "ben": 0, "maria": 0
+    }
+
+    for num in nums:
+        primes = [i for i in range(2, num + 1) if is_prime(i)]
         if len(primes) % 2 == 0:
             wins["ben"] += 1
         else:
             wins["maria"] += 1
-        i += 1
 
-    if wins["ben"] > wins["maria"]:
-        return 'Ben'
-    elif wins["maria"] > wins["ben"]:
-        return 'Maria'
+    if wins["maria"] > wins["ben"]:
+        return "Maria"
+    elif wins["ben"] > wins["maria"]:
+        return "Ben"
     else:
         return None
